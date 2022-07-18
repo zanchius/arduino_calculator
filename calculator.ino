@@ -1,27 +1,15 @@
-/* @file CustomKeypad.pde
-|| @version 1.0
-|| @author Alexander Brevig
-|| @contact alexanderbrevig@gmail.com
-||
-|| @description
-|| | Demonstrates changing the keypad size and key values.
-|| #
-*/
+// LED display stuff
 #include <SPI.h>
 #define PRINT_DIGIT_NEG 1
 #include <DigitLed72xx.h>
-
-// What pin on the Arduino connects to the LOAD/CS pin on the MAX7219/MAX7221
 #define LOAD_PIN 10
 #define NCHIP 1
-
 DigitLed72xx ld = DigitLed72xx(LOAD_PIN, NCHIP);
 
+// Keypad stuff
 #include <Keypad.h>
-
-const byte ROWS = 6; //four rows
-const byte COLS = 4; //four columns
-//define the cymbols on the buttons of the keypads
+const byte ROWS = 6;
+const byte COLS = 4;
 char hexaKeys[ROWS][COLS] = {
   {'+','.','0','='},
   {'+','9','8','7'},
@@ -30,14 +18,11 @@ char hexaKeys[ROWS][COLS] = {
   {'/','l','e','s'},
   {'c','%','d','h'}
 };
-byte rowPins[ROWS] = {4,5,6,7,8,9}; //connect to the row pinouts of the keypad
-byte colPins[COLS] = {1,0,2,3}; //connect to the column pinouts of the keypad
-char buffern[8];
-
-//initialize an instance of class NewKeypad
+byte rowPins[ROWS] = {4,5,6,7,8,9};
+byte colPins[COLS] = {1,0,2,3};
 Keypad customKeypad = Keypad( makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS); 
 
-int nvalue;
+char buffern[8]; //Used to capture the keypad input
 int i = 0;
 
 void setup(){
