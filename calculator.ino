@@ -24,87 +24,137 @@ Keypad customKeypad = Keypad( makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS
 
 char buffern[8]; //Used to capture the keypad input
 int i = 0;
+int n = 0;
+int a = 0;
 
 void setup(){
   Serial.begin(9600);
   ld.setDigitLimit(8,NCHIP);
   ld.on(2);
+  ld.printDigit(0,NCHIP,0);
 }
   
 void loop(){
+  char operand;
   char customKey = customKeypad.getKey();
-  if (customKey && i < 9){
-    if(customKey == '1')
+    if(customKey == '1' && (i < 9))
     {
+      ld.clear();
       buffern[i] = customKey;
-      int n = atoi(buffern);
-      ld.printDigit(n,NCHIP,i);
+      n = atoi(buffern);
+      ld.printDigit(n,NCHIP,0);
       i++;
     }
-    if(customKey == '2')
+    if(customKey == '2' && (i < 9))
     {
+      ld.clear();
       buffern[i] = customKey;
-      int n = atoi(buffern);
-      ld.printDigit(n,NCHIP,i);
+      n = atoi(buffern);
+      ld.printDigit(n,NCHIP,0);
       i++;
     }
-    if(customKey == '3')
+    if(customKey == '3' && (i < 9))
     {
+      ld.clear();
       buffern[i] = customKey;
-      int n = atoi(buffern);
-      ld.printDigit(n,NCHIP,i);
+      n = atoi(buffern);
+      ld.printDigit(n,NCHIP,0);
       i++;
     }
-    if(customKey == '4')
+    if(customKey == '4' && (i < 9))
     {
+      ld.clear();
       buffern[i] = customKey;
-      int n = atoi(buffern);
-      ld.printDigit(n,NCHIP,i);
+      n = atoi(buffern);
+      ld.printDigit(n,NCHIP,0);
       i++;
     }
-    if(customKey == '5')
+    if(customKey == '5' && (i < 9))
     {
+      ld.clear();
       buffern[i] = customKey;
-      int n = atoi(buffern);
-      ld.printDigit(n,NCHIP,i);
+      n = atoi(buffern);
+      ld.printDigit(n,NCHIP,0);
       i++;
     }
-    if(customKey == '6')
+    if(customKey == '6' && (i < 9))
     {
+      ld.clear();
       buffern[i] = customKey;
-      int n = atoi(buffern);
-      ld.printDigit(n,NCHIP,i);
+      n = atoi(buffern);
+      ld.printDigit(n,NCHIP,0);
       i++;
     }
-    if(customKey == '7')
+    if(customKey == '7' && (i < 9))
     {
+      ld.clear();
       buffern[i] = customKey;
-      int n = atoi(buffern);
-      ld.printDigit(n,NCHIP,i);
+      n = atoi(buffern);
+      ld.printDigit(n,NCHIP,0);
       i++;
     }
-    if(customKey == '8')
+    if(customKey == '8' && (i < 9))
     {
+      ld.clear();
       buffern[i] = customKey;
-      int n = atoi(buffern);
-      ld.printDigit(n,NCHIP,i);
+      n = atoi(buffern);
+      ld.printDigit(n,NCHIP,0);
       i++;
     }
-    if(customKey == '9')
+    if(customKey == '9' && (i < 9))
     {
+      ld.clear();
       buffern[i] = customKey;
-      int n = atoi(buffern);
-      ld.printDigit(n,NCHIP,i);
+      n = atoi(buffern);
+      ld.printDigit(n,NCHIP,0);
       i++;
     }
-    if(customKey == '0')
+    if(customKey == '0' && (i < 9))
     {
+      ld.clear();
       buffern[i] = customKey;
-      int n = atoi(buffern);
-      ld.printDigit(n,NCHIP,i);
+      n = atoi(buffern);
+      ld.printDigit(n,NCHIP,0);
       i++;
     }
-
-  }
-  
+    if(customKey == 'c')
+    {
+      ld.clear();
+      i = 0;
+      int n = 0;
+      memset(buffern, 0, sizeof(buffern));
+      ld.printDigit(0,NCHIP,0);
+    }
+    if(customKey == '+')
+    {
+      a = n;
+      i = 0;
+      int n = 0;
+      memset(buffern, 0, sizeof(buffern));
+      operand = 's';
+    }
+    if(customKey == '-')
+    {
+      a = n;
+      i = 0;
+      int n = 0;
+      memset(buffern, 0, sizeof(buffern));
+      operand = 'm';
+    }
+    if(customKey == '=')
+    {
+      if (operand =='s')
+      {
+        int b = n + a;
+        ld.printDigit(b,NCHIP,0);
+        n = b;
+      }
+      if (operand =='m')
+      {
+        int b = a - n;
+        ld.printDigit(b,NCHIP,0);
+        n = b;
+      }
+    }
 }
+
